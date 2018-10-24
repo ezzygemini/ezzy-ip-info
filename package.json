@@ -1,7 +1,7 @@
 {
   "name": "ezzy-public-ip",
   "description": "A small function used to obtain a public IP.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": {
     "name": "Moises Romero",
     "url": "http://ezzygemini.com",
