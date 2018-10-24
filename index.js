@@ -37,17 +37,18 @@ class IpInfo {
    * @returns {string}
    */
   static get publicIP() {
-    if (this.publicIp) {
-      return this.publicIp;
+    if (this._publicIp) {
+      return this._publicIp;
     }
     for (const command of GET_PUBLIC_IP_COMMANDS) {
       try {
-        this.publicIp = execSync(command)
+        this._publicIp = execSync(command)
           .toString()
           .trim();
+        return this._publicIp;
       } catch (e) {}
     }
-    return this.publicIp;
+    return this._publicIp;
   }
 
   /**
