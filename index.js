@@ -15,6 +15,14 @@ const GET_PUBLIC_IP_COMMANDS = [
  * Class to obtain the current IP.
  */
 class PublicIp {
+  constructor() {
+    /**
+     * The public IP of the machine.
+     * Machine should change the IP while is running, so we're caching it.
+     * @type {string}
+     */
+    this.ip = "";
+  }
   /**
    * Gets the public IP of the current machine by executing some
    * known commands in OSX.
@@ -22,7 +30,6 @@ class PublicIp {
    */
   static get publicIP() {
     if (this.ip) {
-      // Machine should change the IP while is running, so we're caching it.
       return this.ip;
     }
     for (const command of GET_PUBLIC_IP_COMMANDS) {
@@ -32,7 +39,7 @@ class PublicIp {
           .trim();
       } catch (e) {}
     }
-    return "";
+    return this.ip;
   }
 
   /**
