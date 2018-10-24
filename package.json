@@ -1,0 +1,15 @@
+{
+  "name": "ezzy-public-ip",
+  "description": "A small function used to obtain a public IP.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Moises Romero",
+    "url": "http://ezzygemini.com",
+    "email": "ezzygemini@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ezzygemini/ezzy-public-ip.git"
+  },
+  "license": "MIT"
+}
