@@ -1,5 +1,5 @@
 {
-  "name": "ezzy-public-ip",
+  "name": "ezzy-ip-info",
   "description": "A small function used to obtain a public IP.",
   "version": "1.2.0",
   "author": {
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ezzygemini/ezzy-public-ip.git"
+    "url": "https://github.com/ezzygemini/ezzy-ip-info.git"
   },
   "license": "MIT"
 }
