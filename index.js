@@ -1,4 +1,5 @@
 const { execSync } = require("child_process");
+const { networkInterfaces } = require("os");
 
 /**
  * Commands used to obtain the public IP.
@@ -14,14 +15,21 @@ const GET_PUBLIC_IP_COMMANDS = [
 /**
  * Class to obtain the current IP.
  */
-class PublicIp {
+class IpInfo {
   constructor() {
     /**
      * The public IP of the machine.
      * Machine should change the IP while is running, so we're caching it.
      * @type {string}
+     * @private
      */
-    this.ip = "";
+    this._publicIp = "";
+    /**
+     * The local network IP.
+     * @type {string}
+     * @private
+     */
+    this._localIp = "";
   }
   /**
    * Gets the public IP of the current machine by executing some
@@ -29,17 +37,17 @@ class PublicIp {
    * @returns {string}
    */
   static get publicIP() {
-    if (this.ip) {
-      return this.ip;
+    if (this.publicIp) {
+      return this.publicIp;
     }
     for (const command of GET_PUBLIC_IP_COMMANDS) {
       try {
-        this.ip = execSync(command)
+        this.publicIp = execSync(command)
           .toString()
           .trim();
       } catch (e) {}
     }
-    return this.ip;
+    return this.publicIp;
   }
 
   /**
@@ -47,8 +55,29 @@ class PublicIp {
    * @returns {string}
    */
   static get publicCIDRIP() {
-    return PublicIp.publicIP + "/32";
+    return IpInfo.publicIP + "/32";
+  }
+
+  /**
+   * Obtains the local IP address inside the network.
+   * @returns {*}
+   */
+  static get localIP() {
+    if (this._localIp) {
+      return this._localIp;
+    }
+    const interfaces = networkInterfaces();
+    for (let k in interfaces) {
+      for (let k2 in interfaces[k]) {
+        let address = interfaces[k][k2];
+        if (address.family === "IPv4" && !address.internal) {
+          this._localIp = address.address;
+          return this._localIp;
+        }
+      }
+    }
+    return "localhost";
   }
 }
 
-module.exports = PublicIp;
+module.exports = IpInfo;
