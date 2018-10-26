@@ -6,9 +6,9 @@ const { networkInterfaces } = require("os");
  * @type {string[]}
  */
 const GET_PUBLIC_IP_COMMANDS = [
+  "curl ipinfo.io/ip",
   `curl -s checkip.dyndns.org` +
     `| sed -e 's/.*Current IP Address: //' -e 's/<.*$//'`,
-  "curl ipinfo.io/ip",
   "dig +short myip.opendns.com @resolver1.opendns.com"
 ];
 
